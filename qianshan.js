@@ -852,15 +852,11 @@ $(document).ready(function(){
   }
   //插入需要更改快捷键的站点快捷键分类名
   function insertInAllHotkeysInClassnameToBeDeletedAfterEdit(hotkeyInClassName){
-    //console.log('insertInAllHotkeysInClassnameToBeDeletedAfterEdit: ', hotkeyInClassName);
     allHotkeyClassnamesToBeDeletedAfterEdit.unshift(hotkeyInClassName);
-    //console.log('Current allHotkeyClassnamesToBeDeletedAfterEdit',allHotkeyClassnamesToBeDeletedAfterEdit);
   }
   //移除需要更改快捷键的站点快捷键分类名
   function removeFromAllHotkeysInClassnameToBeDeletedAfterEdit(hotkeyInClassName){
-    //console.log('removeFromAllHotkeysInClassnameToBeDeletedAfterEdit: ', hotkeyInClassName);
     allHotkeyClassnamesToBeDeletedAfterEdit.splice(jQuery.inArray(hotkeyInClassName,allHotkeyClassnamesToBeDeletedAfterEdit),1);
-    //console.log('Current allHotkeyClassnamesToBeDeletedAfterEdit',allHotkeyClassnamesToBeDeletedAfterEdit);
   }
   //在文档中更改要删除快捷键的站点，并更新到storage中，先更新文档元素，再更新storage
   function updateAllHotkeysInClassnameToBeDeletedAfterEditInDocumentAndStorage(){
@@ -956,14 +952,6 @@ $(document).ready(function(){
         //console.log('updateCategoryInStorage: saved category in chrome.storage.sync', data);
       });
     });
-    //localStorage对主站使用，这里先注释掉
-    /*
-    if(window.localStorage){
-      category_to_be_updated_in_str = JSON.stringify(category_to_be_updated);
-      localStorage.category_id = category_to_be_updated_in_str;
-      console.log('updateCategoryInStorage: saved category in localStorage', localStorage.website_id);
-    }
-    */
   }
   //updateCategoryInDocument，将编辑后的分类名写入document，取全部分类数据可以用updateAllWebsitesAndCategoriesWithStorage，方法名加上分类，因为这里已经取了全量数据
   function updateCategoryInDocument(category_to_be_updated){
@@ -982,14 +970,6 @@ $(document).ready(function(){
         //console.log('updateWebsiteInStorage: saved website in chrome.storage.sync', data);
       });
     });
-    //localStorage对主站使用，这里先注释掉
-    /*
-    if(window.localStorage){
-      website_to_be_updated_in_str = JSON.stringify(website_to_be_updated);
-      localStorage.website_id = website_to_be_updated_in_str;
-      console.log('updateWebsiteInStorage: saved website in localStorage', localStorage.website_id);
-    }
-    */
   }
   //updateWebsiteInDocument，单次编辑完成后将被编辑的站点信息更新到document
   function updateWebsiteInDocument(website_to_be_updated){
@@ -1014,12 +994,6 @@ $(document).ready(function(){
         updateAllWebsitesAndCategoriesWithStorage(data_in_storage);
       }
     });
-    //localStorage对主站使用，这里先注释掉
-    /*
-    if(window.localStorage){
-      updateAllWebsitesAndCategoriesWithStorage(window.localStorage);
-    }
-    */
 
   }
   //updateAllWebsitesAndCategoriesWithStorage，被initiateAllWebsitesAndCategoriesWithStorage异步读取storage后调用，修改页面中的自定义站点
@@ -1041,27 +1015,7 @@ $(document).ready(function(){
         $("a#"+data_id).addClass(data_in_storage[data_id].website_hotkey.toString().split(',').join(' '));
       }
     }
-    //localStorage对主站使用，这里先注释掉
-    /*
-    if(window.localStorage){
-      for ( var data_id in data_in_storage){
-        if( parseInt(data_id) > 0 && parseInt(data_id) < 10){
-          console.log("updateAllWebsitesAndCategoriesWithStorage: category " + data_id);
-          var category_to_be_updated_in_document = JSON.parse(data_in_storage.data_id);
-          $("a#"+data_id).text(category_to_be_updated_in_document.category_name);
-        }
-        if( parseInt(data_id) > 10 && parseInt(data_id) < 100){
-          console.log("updateAllWebsitesAndCategoriesWithStorage: website " + data_id);
-          var website_to_be_updated_in_document = JSON.parse(data_in_storage.data_id);
-          $("a#"+data_id).children('span').text(website_to_be_updated_in_document.website_name);
-          $("a#"+data_id).attr('href', website_to_be_updated_in_document.website_link);
-          $("a#"+data_id).removeClass();
-          $("a#"+data_id).addClass('website');
-          $("a#"+data_id).addClass(website_to_be_updated_in_document.website_hotkey.toString().split(',').join(' '));
-        }
-      }
-    }
-    */
+
     $("div.blocks").css('opacity','1');
   }
 
